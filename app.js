@@ -1,6 +1,6 @@
 require('dotenv').config();
-const SECRET="thisIsMySecret";
-const DB_URL="mongodb+srv://sameer230202:sameer123@safecadet.rylfqad.mongodb.net/safecadet?retryWrites=true&w=majority";
+// const SECRET="thisIsMySecret";
+// const DB_URL="mongodb+srv://sameer230202:sameer123@safecadet.rylfqad.mongodb.net/safecadet?retryWrites=true&w=majority";
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -24,7 +24,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to the database..'))
+    .catch(err => {
+        console.log(err);
+    });
 mongoose.set("useCreateIndex", true);
 
 
